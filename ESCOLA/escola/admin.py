@@ -15,3 +15,6 @@ class Cursos(admin.ModelAdmin):
     search_fields = ('codigo',)
 
 admin.site.register(Curso, Cursos)
+
+
+###
