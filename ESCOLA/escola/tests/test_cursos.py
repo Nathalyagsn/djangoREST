@@ -29,3 +29,13 @@ class CursosTestCase(APITestCase):
         """Teste de requisição DELETE um curso"""
         response = self.client.delete(f'{self.url}2/')
         self.assertEqual(response.status_code,status.HTTP_204_NO_CONTENT)
+
+    def test_de_requisicao_put_para_atualizar_um_curso(self):
+        """Testte de requisição PUT para um curso"""
+        dados = {
+            'codigo': 'CCD',
+            'descricao': 'Teste para atualizar',
+            'nivel': 'B'
+        }
+        response = self.client.put(f'{self.url}1/', data=dados)
+        self.assertEqual(response.status_code,status.HTTP_200_OK)
