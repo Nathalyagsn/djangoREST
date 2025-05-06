@@ -24,3 +24,8 @@ class CursosTestCase(APITestCase):
         """Teste de requisição GET"""
         response = self.client.get(self.url)
         self.assertEqual(response.status_code,status.HTTP_200_OK)
+    
+    def test_de_requisicao_delete_um_curso(self):
+        """Teste de requisição DELETE um curso"""
+        response = self.client.delete(f'{self.url}2/')
+        self.assertEqual(response.status_code,status.HTTP_204_NO_CONTENT)
