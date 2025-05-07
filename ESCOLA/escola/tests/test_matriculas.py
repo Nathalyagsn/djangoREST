@@ -5,33 +5,14 @@ from rest_framework import status
 from escola.models import Matricula, Estudante, Curso
 
 class MatriculasTestCase(APITestCase):
+    fixtures = ['prototipo_banco.json']
     def setUp(self):
-        self.usuario = User.objects.create_superuser(username='admin', password='admin')
+        self.usuario = User.objects.get(username='nat')
         self.url = reverse('Matriculas-list')
         self.client.force_authenticate(user=self.usuario)
-        self.estudante = Estudante.objects.create(
-            nome='João da Silva',
-            cpf='12345678900',
-            data_nascimento='2000-01-01'
-        )
-
-        self.curso = Curso.objects.create(
-            codigo='C001',
-            descricao='Curso de Python',
-            nivel='B'
-        )
-
-        Matricula.objects.create(
-            estudante=self.estudante,
-            curso=self.curso,
-            periodo='Noturno'
-        )
-
-        Matricula.objects.create(
-            estudante=self.estudante,
-            curso=self.curso,
-            periodo='Diurno'
-        )
+        self.estudante = Estudante.objects.get(pk=1)
+        self.curso = Curso.objects.get(pk=1)
+        self.matricula = Matricula.objects.get(pk=1)
 
     def test_de_requisicao_get_para_listar_matricula(self):
         """Teste de requisição GET"""
